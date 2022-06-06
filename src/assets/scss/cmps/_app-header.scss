@@ -1,0 +1,25 @@
+.app-header {
+    background-color: $clr1;
+    color: whitesmoke;
+    font-weight: 600;
+    height: 15vh;
+
+    .header-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 1120px; //change this according to wanted design
+        margin: auto;
+        height: 100%;
+        padding: 0 20px;
+        nav {
+            ul {
+                display: flex;
+
+                > li:not(:last-child) {
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}

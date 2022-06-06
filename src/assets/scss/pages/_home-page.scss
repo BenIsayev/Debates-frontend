@@ -1,0 +1,51 @@
+.home-page {
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
+    padding-top: 25vh;
+    position: relative;
+    min-height: $minHeight;
+
+    .greeting {
+        right: 0;
+        top: 0;
+        position: absolute;
+        font-size: 2rem;
+        font-weight: bold;
+        color: $clr1;
+    }
+    .login {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        .guest-input {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            input {
+                padding: 0.5rem;
+            }
+        }
+        .google-signin {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem;
+            img {
+                width: 1.5rem;
+            }
+        }
+    }
+
+    .game-details {
+        // text-align: center;
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
