@@ -1,5 +1,7 @@
 import {useSelector} from 'react-redux';
+import {useState} from 'react';
 import {NavLink} from 'react-router-dom';
+import CommentList from './CommentList';
 const commentsIcon = require('../assets/img/comment.png');
 
 const DebatePreview = ({debate}) => {
@@ -16,23 +18,13 @@ const DebatePreview = ({debate}) => {
       <NavLink to={`/debate/${nextDebateId}`} className="skip-btn btn">
         דלג
       </NavLink>
-      {nextDebateId}
+
       <a href="/" className="comments-btn">
         <img src={commentsIcon} alt="" />
       </a>
 
-      <div>
-        <div className="comments-title">תגובות</div>
-
-        <ul className="clean-list">
-          {debate.comments.map((comment) => (
-            <li key={comment._id}>
-              {comment.text}
-              By: {comment.user}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <CommentList debate={debate} />
+      {/* {isShowComments && <CommentList debate={debate} />} */}
     </section>
   );
 };

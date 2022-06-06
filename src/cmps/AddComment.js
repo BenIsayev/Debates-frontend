@@ -6,6 +6,7 @@ const AddComment = ({addComment}) => {
   const addCommentHandler = (ev) => {
     ev.preventDefault();
     addComment(commentText);
+    setCommentText('');
   };
 
   const commentTypeHandler = (ev) => {
@@ -14,7 +15,7 @@ const AddComment = ({addComment}) => {
 
   return (
     <form onSubmit={addCommentHandler}>
-      <input type="text" onChange={commentTypeHandler} />
+      <input type="text" onChange={commentTypeHandler} value={commentText} />
       <button>Add</button>
     </form>
   );
