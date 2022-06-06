@@ -1,26 +1,23 @@
-import { useState } from "react"
+import {useState} from 'react';
 
-const AddComment = ({ debateId, addComment }) => {
+const AddComment = ({addComment}) => {
+  const [commentText, setCommentText] = useState('');
 
-    const [commentText, setCommentText] = useState('')
+  const addCommentHandler = (ev) => {
+    ev.preventDefault();
+    addComment(commentText);
+  };
 
-    const addCommentHandler = (ev) => {
-        ev.preventDefault();
-        addComment(commentText)
+  const commentTypeHandler = (ev) => {
+    setCommentText(ev.target.value);
+  };
 
-    }
+  return (
+    <form onSubmit={addCommentHandler}>
+      <input type="text" onChange={commentTypeHandler} />
+      <button>Add</button>
+    </form>
+  );
+};
 
-    const commentTypeHandler = (ev) => {
-
-        setCommentText(ev.target.value)
-    }
-
-    return (
-        <form onSubmit={addCommentHandler}>
-            <input type="text" onChange={commentTypeHandler} />
-            {commentText}
-        </form>
-    )
-}
-
-export default AddComment
+export default AddComment;
