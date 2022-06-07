@@ -1,7 +1,7 @@
-import {NavLink, useParams} from 'react-router-dom';
-import {useSelector, useDispatch} from 'react-redux';
-import {useEffect} from 'react';
-import {fetchDebate, addComment} from '../store/debate-actions';
+import { NavLink, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchDebate, addComment } from '../store/debate-actions';
 
 import LoadingSpinner from '../cmps/LoadingSpinner';
 import DebatePreview from '../cmps/DebatePreview';

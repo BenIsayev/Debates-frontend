@@ -1,5 +1,5 @@
-import {debateService} from '../services/debate-service.js';
-import {debateActions} from './debate-slice';
+import { debateService } from '../services/debate-service.js';
+import { debateActions } from './debate-slice';
 
 export const fetchDebateIds = () => {
   return async (dispatch) => {
@@ -8,7 +8,7 @@ export const fetchDebateIds = () => {
     };
     try {
       const debateIds = await fetchData();
-      dispatch(debateActions.replaceDebateIds({debateIds}));
+      dispatch(debateActions.replaceDebateIds({ debateIds }));
     } catch (err) {
       console.log(err);
     }
@@ -21,8 +21,8 @@ export const fetchDebate = (debateId) => {
       return await debateService.fetchDebateById(debateId);
     };
     try {
-      const debate = await fetchData();
-      dispatch(debateActions.replaceDebate({debate}));
+      const debate = debateId === 'finished' ? undefined : await fetchData();
+      dispatch(debateActions.replaceDebate({ debate }));
     } catch (err) {
       console.log(err);
     }
@@ -31,14 +31,14 @@ export const fetchDebate = (debateId) => {
 
 export const addComment = (commentText) => {
   return async (dispatch, getState) => {
-    const {currDebate} = getState().debate;
+    const { currDebate } = getState().debate;
     const sendCommentData = async () => {
       const comment = debateService.createComment(commentText); // When a user connected send the user as a second param
       const updatedDebate = await debateService.addComment(
         currDebate._id,
         comment
       );
-      dispatch(debateActions.setCurrDebate({debate: updatedDebate}));
+      dispatch(debateActions.setCurrDebate({ debate: updatedDebate }));
     };
     try {
       await sendCommentData();

@@ -1,10 +1,9 @@
-import {useSelector} from 'react-redux';
-import {useState} from 'react';
-import {NavLink} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import CommentList from './CommentList';
 const commentsIcon = require('../assets/img/comment.png');
 
-const DebatePreview = ({debate}) => {
+const DebatePreview = ({ debate }) => {
   const nextDebateId = useSelector((state) => state.debate.nextDebateId);
   return (
     <section className="debate-preview">
