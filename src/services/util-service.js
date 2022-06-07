@@ -1,14 +1,15 @@
 function shuffle(array) {
-  for (var i = array.length - 1; i > 0; i--) {
+  let arrayCopy = JSON.parse(JSON.stringify(array));
+  for (var i = arrayCopy.length - 1; i > 0; i--) {
     // Generate random number
     var j = Math.floor(Math.random() * (i + 1));
 
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
+    var temp = arrayCopy[i];
+    arrayCopy[i] = arrayCopy[j];
+    arrayCopy[j] = temp;
   }
 
-  return array;
+  return arrayCopy;
 }
 
 function makeId(length = 5) {

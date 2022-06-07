@@ -1,64 +1,18 @@
 import {utilService} from './util-service';
+import {httpService} from './http-service';
 
-const DUMMY_DEBATES = [
-  {
-    _id: 'd1',
-    question: 'האם היית מעדיף לשבור יד או לשבור רגל?',
-    comments: [],
-    submitedBy: {
-      userId: 'u1',
-    },
-  },
-  {
-    _id: 'd2',
-    question: 'מה היית מעדיף להיות מאוד נמוך או מאוד גבוה?',
-    comments: [],
-    submitedBy: {
-      userId: 'u1',
-    },
-  },
-  {
-    _id: 'd3',
-    question: 'שאלת דוגמא 3',
-    comments: [],
-    submitedBy: {
-      userId: 'u1',
-    },
-  },
-  {
-    _id: 'd4',
-    question: 'שאלת דוגמא 4',
-    comments: [],
-    submitedBy: {
-      userId: 'u1',
-    },
-  },
-  {
-    _id: 'd5',
-    question: 'שאלת דוגמא 5',
-    comments: [],
-    submitedBy: {
-      userId: 'u1',
-    },
-  },
-  {
-    _id: 'd6',
-    question: 'שאלת דוגמא 6',
-    comments: [],
-    submitedBy: {
-      userId: 'u1',
-    },
-  },
-];
-
-const fetchDebateIds = () => {
-  utilService.shuffle(DUMMY_DEBATES);
-  return Promise.resolve(DUMMY_DEBATES.map((debate) => debate._id));
+const fetchDebateIds = async () => {
+  try {
+    const debateIds = await httpService.get('debate/ids');
+    const shuffeldIds = utilService.shuffle(debateIds);
+    return shuffeldIds;
+  } catch (err) {
+    console.error('Failed getting debate ids', err);
+  }
 };
-
 const fetchDebateById = async (debateId) => {
-  const debate = DUMMY_DEBATES.find((debate) => debateId === debate._id);
-  return Promise.resolve(debate);
+  const debate = await httpService.get(`debate/${debateId}`);
+  return debate;
 };
 
 const createComment = (text) => {
@@ -70,13 +24,13 @@ const createComment = (text) => {
   };
 };
 
-const updateDebate = async (debate) => {
-  console.log(debate);
+const addComment = async (debateId, comment) => {
+  return await httpService.put(`debate/${debateId}`, comment);
 };
 
 export const debateService = {
   fetchDebateById,
   fetchDebateIds,
   createComment,
-  updateDebate,
+  addComment,
 };

@@ -32,19 +32,18 @@ export const fetchDebate = (debateId) => {
 export const addComment = (commentText) => {
   return async (dispatch, getState) => {
     const {currDebate} = getState().debate;
-    const debateCopy = JSON.parse(JSON.stringify(currDebate));
     const sendCommentData = async () => {
       const comment = debateService.createComment(commentText); // When a user connected send the user as a second param
-      const debate = JSON.parse(JSON.stringify(debateCopy));
-      debate.comments.unshift(comment);
-      dispatch(debateActions.setCurrDebate({debate}));
-      return await debateService.updateDebate(debate);
+      const updatedDebate = await debateService.addComment(
+        currDebate._id,
+        comment
+      );
+      dispatch(debateActions.setCurrDebate({debate: updatedDebate}));
     };
     try {
       await sendCommentData();
     } catch (err) {
       console.error(err);
-      dispatch(debateActions.setCurrDebate({debate: debateCopy}));
     }
   };
 };
