@@ -1,19 +1,22 @@
-import {useState} from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login, signup } from '../store/user-actions'
 
 const LoginPage = () => {
+  const dispatch = useDispatch()
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
 
-  const login = (ev) => {
+  const loginHandler = (ev) => {
     ev.preventDefault();
-    console.log(username, password);
+    isSignUp ? dispatch(signup({ username, password })) : dispatch(login({ username, password }));
     setUsername('');
     setPassword('');
   };
   return (
     <div>
-      <form onSubmit={(ev) => login(ev)}>
+      <form onSubmit={loginHandler}>
         <label htmlFor="username">שם משתמש</label>
         <input
           type="text"

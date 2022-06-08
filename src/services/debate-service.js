@@ -1,5 +1,5 @@
-import {utilService} from './util-service';
-import {httpService} from './http-service';
+import { utilService } from './util-service';
+import { httpService } from './http-service';
 
 const fetchDebateIds = async () => {
   try {
